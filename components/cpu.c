@@ -122,8 +122,7 @@
 
 		size = sizeof(freq);
 		/* in MHz */
-		if (sysctlbyname("hw.clockrate", &freq, &size, NULL, 0) == -1
-				|| !size) {
+		if (sysctlbyname("hw.clockrate", &freq, &size, NULL, 0) < 0 || !size) {
 			warn("sysctlbyname 'hw.clockrate':");
 			return NULL;
 		}
@@ -140,8 +139,7 @@
 
 		size = sizeof(a);
 		memcpy(b, a, sizeof(b));
-		if (sysctlbyname("kern.cp_time", &a, &size, NULL, 0) == -1
-				|| !size) {
+		if (sysctlbyname("kern.cp_time", &a, &size, NULL, 0) < 0 || !size) {
 			warn("sysctlbyname 'kern.cp_time':");
 			return NULL;
 		}
